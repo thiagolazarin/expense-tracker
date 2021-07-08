@@ -2,7 +2,6 @@
 
 const mysql = require('mysql');
 const con = require("./mysql");
-
 module.exports = class Sql {
 
     static async conectar(callback) {
@@ -74,8 +73,6 @@ module.exports = class Sql {
         });
     }
 
-
-
     async query(queryStr, valores = null) {
         return new Promise((resolve, reject) => {
             let terminar = (error, results, fields) => {
@@ -97,8 +94,6 @@ module.exports = class Sql {
                 this.connection.query(queryStr, terminar);
         });
     }
-
-
 
     async scalar(queryStr, valores = null) {
         return new Promise((resolve, reject) => {
@@ -152,8 +147,6 @@ module.exports = class Sql {
         });
     }
 
-
-
     async commit() {
         return new Promise((resolve, reject) => {
 
@@ -175,7 +168,6 @@ module.exports = class Sql {
             });
         });
     }
-
 
 
     async rollback() {
