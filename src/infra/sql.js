@@ -1,7 +1,7 @@
 "use strict";
 
 const mysql = require('mysql');
-const con = require("./mysql-connection");
+const con = require("./mysql");
 
 module.exports = class Sql {
 

@@ -1,16 +1,34 @@
+// SERVICE
+
+// Regras de negocios
+
 const transaction = require("../models/transaction")
 const transactionModel = require("../models/transaction")
 
+const { ApplicationError } = require ('@pedromiotti/exerror');
+const customExceptions = require('../exceptions/customExceptions');
+
 const registerTransaction = async(tipo, valor, categoriaId) => {
     if(!tipo || !valor || !categoriaId){
-        return 'missing information'
+        throw new ApplicationError(customExceptions.MISSING_INFORMATION);
     }
 
-    const data = Date()
-
-    await transactionModel.registerTransaction(tipo, data, valor, categoriaId)
-
+    await transactionModel.registerTransaction(tipo, valor, categoriaId)
 
 } 
 
-module.exports = {registerTransaction};
+const getAllTransactions = async() => {
+
+    return await transactionModel.getAllTransactions();
+
+}
+
+
+module.exports = { registerTransaction, getAllTransactions };
+
+
+
+
+
+
+
