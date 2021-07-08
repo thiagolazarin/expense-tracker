@@ -9,17 +9,27 @@ const { ApplicationError } = require ('@pedromiotti/exerror');
 const customExceptions = require('../exceptions/customExceptions');
 
 const registerTransaction = async(tipo, valor, categoriaId) => {
-    if(!tipo || !valor || !categoriaId){
-        throw new ApplicationError(customExceptions.MISSING_INFORMATION);
-    }
+    try {
+        
+        if(!tipo || !valor || !categoriaId){
+            throw new ApplicationError(customExceptions.MISSING_INFORMATION);
+        }
 
-    await transactionModel.registerTransaction(tipo, valor, categoriaId)
+        await transactionModel.registerTransaction(tipo, valor, categoriaId)
+    } catch (error) {
+        throw new ApplicationError(error);
+    }
 
 } 
 
 const getAllTransactions = async() => {
-
-    return await transactionModel.getAllTransactions();
+    try {
+        
+        return await transactionModel.getAllTransactions();
+        
+    } catch (error) {
+        throw new ApplicationError(error);
+    }
 
 }
 

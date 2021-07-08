@@ -2,48 +2,39 @@
 
 // Conversas com o banco de dados
 
-const Sql = require("../infra/sql")
+const Sql = require("../infra/sql");
 
 class Transaction {
+  constructor(tipo, valor, categoriaId, id, data) {
+    this.id = id;
+    this.data = data;
+    this.categoriaId = categoriaId;
+    this.valor = valor;
+    this.tipo = tipo;
+  }
 
-    constructor(tipo, valor, categoriaId, id, data){
-        
-        this.id = id;
-        this.data = data;
-        this.categoriaId = categoriaId;
-        this.valor = valor;
-        this.tipo  = tipo;
+  static async registerTransaction(
+    tipo_transasao,
+    transasao_valor,
+    categoriaId
+  ) {
+    let resp = await Sql.conectar(async (sql) => {
+      await sql.query(
+        "insert into transasao (tipo_transasao, tran_data, tran_valor, cat_id) values (?, now(), ?, ?)",
+        [tipo_transasao, transasao_valor, categoriaId]
+      );
+    });
+  }
 
-    }
+  static async getAllTransactions() {
+    let transacoes = [];
 
-    static async registerTransaction(tipo_transasao, transasao_valor, categoriaId){
-        try {
+    await Sql.conectar(async (sql) => {
+      transacoes = await sql.query("SELECT * FROM transaeo");
+    });
 
-            let resp = await Sql.conectar(async(sql) => {
-                await sql.query("insert into transasao (tipo_transasao, tran_data, tran_valor, cat_id) values (?, now(), ?, ?)", [tipo_transasao, transasao_valor, categoriaId])
-            });
-
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
-    static async getAllTransactions(){
-        let transacoes = [];
-
-        try {
-            await Sql.conectar(async(sql) => {
-                transacoes = await sql.query("SELECT * FROM transasao");
-            })
-            
-        } catch (error) {
-            console.log(e);
-        }
-
-        return transacoes;
-
-    }
-
+    return transacoes;
+  }
 }
 
-module.exports = transaction;
+module.exports = Transaction;
