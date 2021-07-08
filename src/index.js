@@ -20,10 +20,6 @@ app.use(errorHandler);
 app.listen(PORT, () => {console.log("Servidor ok!")})
 
 
-// DB_HOST=localhost
-// DB_USER=root
-// DB_PASSWD=
-// DB_NAME=tracker
 
 
 
