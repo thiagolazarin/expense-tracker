@@ -2,7 +2,6 @@
 
 // Regras de negocios
 
-const transaction = require("../models/transaction")
 const transactionModel = require("../models/transaction")
 
 const { ApplicationError } = require ('@pedromiotti/exerror');
