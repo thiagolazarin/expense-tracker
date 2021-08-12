@@ -30,15 +30,11 @@ class Transaction {
     let transacoes = [];
 
     await Sql.conectar(async (sql) => {
-      transacoes = await sql.query("SELECT * FROM transaeo");
+      transacoes = await sql.query("SELECT * FROM transasao");
     });
 
     return transacoes;
   }
 }
 
-<<<<<<< HEAD
 module.exports = Transaction;
-=======
-module.exports = Transaction;
->>>>>>> d0bb0a7e9c6a3a33add27afdd9350c7747fcf7bb

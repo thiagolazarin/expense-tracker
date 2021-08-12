@@ -23,6 +23,7 @@ class Category {
             console.log(error);
         }
     }
+    
     static async getAllCategorys(){
 
         let categorias = [];
