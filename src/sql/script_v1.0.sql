@@ -33,6 +33,7 @@ DROP TABLE IF EXISTS `tracker`.`categoria` ;
 CREATE TABLE IF NOT EXISTS `tracker`.`categoria` (
   `cat_id` INT NOT NULL AUTO_INCREMENT,
   `cat_nome` VARCHAR(60) NULL,
+  `cat_icon_id` VARCHAR(10) NULL
   PRIMARY KEY (`cat_id`))
 ENGINE = InnoDB;
 
@@ -43,15 +44,16 @@ DROP TABLE IF EXISTS `tracker`.`transasao` ;
 
 CREATE TABLE IF NOT EXISTS `tracker`.`transasao` (
   `tran_id` INT NOT NULL AUTO_INCREMENT,
-  `tipo_transasao` INT NOT NULL,
+  `tipo_transasao_id` INT NOT NULL,
   `tran_data` DATETIME NOT NULL,
+  `descricao` VARCHAR(60) NOT NULL,
   `tran_valor` DECIMAL(12,2) NULL,
   `cat_id` INT NULL,
   PRIMARY KEY (`tran_id`),
-  INDEX `fk_tipo_tran_nome_idx` (`tipo_transasao` ASC) VISIBLE,
+  INDEX `fk_tipo_tran_nome_idx` (`tipo_transasao_id` ASC) VISIBLE,
   INDEX `fk_cat_tran_id_idx` (`cat_id` ASC) VISIBLE,
   CONSTRAINT `fk_tipo_tran_id`
-    FOREIGN KEY (`tipo_transasao`)
+    FOREIGN KEY (`tipo_transasao_id`)
     REFERENCES `tracker`.`tipo_transasao` (`tipo_tran_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,

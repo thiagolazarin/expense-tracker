@@ -11,12 +11,10 @@ class Category {
         this.nome = nome;
     }
 
-    static async registerCategory(nome){
-
+    static async registerCategory(nome, icon_id){
         try {
-            
             await Sql.conectar(async(sql) => {
-                await sql.query("insert into categoria (cat_nome) values(?)", [nome]);
+                await sql.query("insert into categoria (cat_nome, cat_icon_id) values(?, ?)", [nome, icon_id]);
             })
 
         } catch (error) {

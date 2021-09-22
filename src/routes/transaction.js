@@ -7,8 +7,8 @@ const servicesTransaction = require("../services/transaction")
 // --> Register transaction
 router.post("/", async(req, res, next) => {
     try {
-        const {tipo, valor, categoriaId} = req.body;
-        await servicesTransaction.registerTransaction(tipo, valor, categoriaId);
+        const { data, descricao, tipo, valor, categoriaId } = req.body;
+        await servicesTransaction.registerTransaction(tipo, valor, categoriaId, data, descricao);
 
         res.status(201).send("Transacao criada !");
 
